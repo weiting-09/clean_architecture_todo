@@ -4,34 +4,34 @@ import '../datasources/todo_local_datasource.dart';
 import '../models/todo_model.dart';
 
 class TodoRepositoryImpl implements TodoRepository {
-  final TodoLocalDataSource ds;
+  final TodoLocalDataSource dataSource;
 
-  TodoRepositoryImpl(this.ds);
+  TodoRepositoryImpl(this.dataSource);
 
   @override
-  Future<List<TodoEntity>> getTodos() => ds.fetchTodos();
+  Future<List<TodoEntity>> getTodos() => dataSource.fetchTodos();
 
   @override
   Future<void> addTodo(String title) async {
-    final todos = await ds.fetchTodos();
+    final todos = await dataSource.fetchTodos();
     final newTodo = TodoModel(id: DateTime.now().toString(), title: title, isDone: false);
     todos.add(newTodo);
-    await ds.saveTodos(todos);
+    await dataSource.saveTodos(todos);
   }
 
   @override
   Future<void> toggleTodo(String id) async {
-    final todos = await ds.fetchTodos();
+    final todos = await dataSource.fetchTodos();
     final updated = todos
         .map((t) => t.id == id ? t.copyWith(isDone: !t.isDone) : t)
         .toList();
-    await ds.saveTodos(updated);
+    await dataSource.saveTodos(updated);
   }
 
   @override
   Future<void> deleteTodo(String id) async {
-    final todos = await ds.fetchTodos();
+    final todos = await dataSource.fetchTodos();
     todos.removeWhere((t) => t.id == id);
-    await ds.saveTodos(todos);
+    await dataSource.saveTodos(todos);
   }
 }

@@ -19,10 +19,10 @@ void main() {
       providers: [
         ChangeNotifierProvider(
           create: (_) => TodoProvider(
-            getTodosUC: GetTodos(repo),
-            addTodoUC: AddTodo(repo),
-            toggleTodoUC: ToggleTodo(repo),
-            deleteTodoUC: DeleteTodo(repo),
+            getTodosUseCase: GetTodos(repo),
+            addTodoUseCase: AddTodo(repo),
+            toggleTodoUseCase: ToggleTodo(repo),
+            deleteTodoUseCase: DeleteTodo(repo),
           ),
         ),
       ],

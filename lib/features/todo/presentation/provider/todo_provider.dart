@@ -6,16 +6,16 @@ import '../../domain/usecases/toggle_todo.dart';
 import '../../domain/entities/todo_entity.dart';
 
 class TodoProvider extends ChangeNotifier {
-  final GetTodos getTodosUC;
-  final AddTodo addTodoUC;
-  final ToggleTodo toggleTodoUC;
-  final DeleteTodo deleteTodoUC;
+  final GetTodos getTodosUseCase;
+  final AddTodo addTodoUseCase;
+  final ToggleTodo toggleTodoUseCase;
+  final DeleteTodo deleteTodoUseCase;
 
   TodoProvider({
-    required this.getTodosUC,
-    required this.addTodoUC,
-    required this.toggleTodoUC,
-    required this.deleteTodoUC,
+    required this.getTodosUseCase,
+    required this.addTodoUseCase,
+    required this.toggleTodoUseCase,
+    required this.deleteTodoUseCase,
   });
 
   List<TodoEntity> todos = [];
@@ -25,23 +25,23 @@ class TodoProvider extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    todos = await getTodosUC();
+    todos = await getTodosUseCase();
     isLoading = false;
     notifyListeners();
   }
 
   Future<void> addTodo(String title) async {
-    await addTodoUC(title);
+    await addTodoUseCase(title);
     await loadTodos();
   }
 
   Future<void> toggleTodo(String id) async {
-    await toggleTodoUC(id);
+    await toggleTodoUseCase(id);
     await loadTodos();
   }
 
   Future<void> deleteTodo(String id) async {
-    await deleteTodoUC(id);
+    await deleteTodoUseCase(id);
     await loadTodos();
   }
 }
