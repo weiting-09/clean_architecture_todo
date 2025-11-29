@@ -44,11 +44,15 @@ class _TodoPageState extends State<TodoPage> {
                 ),
                 IconButton(
                   icon: const Icon(Icons.add),
+                  // onPressed: () {
+                  //   if (controller.text.isNotEmpty) {
+                  //     provider.addTodo(controller.text);
+                  //     controller.clear();
+                  //   }
+                  // },
                   onPressed: () {
-                    if (controller.text.isNotEmpty) {
-                      provider.addTodo(controller.text);
-                      controller.clear();
-                    }
+                    provider.addTodo(controller.text);
+                    controller.clear();
                   },
                 )
               ],
